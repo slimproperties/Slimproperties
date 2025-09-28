@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SLIM PROPERTIES</title>
+  <style>
+    /* === CSS Styling === */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0F2747;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    #entrance {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .logo {
+      width: 600px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .logo:hover {
+      transform: scale(1.05);
+    }
+    .headline {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+    .subline {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.75);
+      margin: 0 0 20px;
+    }
+    .cta {
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 5px;
+    }
+    .cta-primary {
+      background: #27AE60;
+      color: #0F2747;
+    }
+    .cta-secondary {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+    }
+    #site {
+      display: none;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Entrance Screen -->
+  <section id="entrance">
+    <!-- Replace with your actual logo image -->
+    <img src="C:\Users\Fayez\OneDrive\Desktop\Slim prop fE logo.png" alt="SLIM PROPERTIES logo" class="logo" id="logoBtn" />
+    <h1 class="headline" id="headline">Homes that fit your life.</h1>
+    <p class="subline" id="subline">Curated properties, smart insights, simple decisions.</p>
+    <div>
+      <button class="cta cta-primary" id="ctaPrimary">Explore smart listings</button>
+      <button class="cta cta-secondary">Ask Slim</button>
+    </div>
+    <p style="font-size:0.9rem; color:rgba(255,255,255,0.6)">Tip: Click the logo to enter.</p>
+  </section>
+
+  <!-- Main Site -->
+  <main id="site">
+    <h2>Welcome to SLIM PROPERTIES</h2>
+    <p>This is where your property listings, services, and contact form will go.</p>
+  </main>
+
+  <script>
+    // === JavaScript Interactivity ===
+    const logoBtn = document.getElementById('logoBtn');
+    const entrance = document.getElementById('entrance');
+    const site = document.getElementById('site');
+    const headline = document.getElementById('headline');
+
+    // Adaptive greeting based on time
+    const hour = new Date().getHours();
+    if (hour < 12) headline.textContent = "Good morning. Homes that fit your life.";
+    else if (hour < 18) headline.textContent = "Good afternoon. Homes that fit your life.";
+    else headline.textContent = "Good evening. Homes that fit your life.";
+
+    // Click logo to enter site
+    logoBtn.addEventListener('click', () => {
+      entrance.style.display = 'none';
+      site.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
