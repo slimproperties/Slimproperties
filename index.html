@@ -92,9 +92,9 @@
 
     // Adaptive greeting based on time
     const hour = new Date().getHours();
-    if (hour < 12) headline.textContent = "Good morning. Click on the logo to begin your journey.";
-    else if (hour < 18) headline.textContent = "Good afternoon. Click on the logo to begin your journey.";
-    else headline.textContent = "Good evening. Click on the logo to begin your journey.";
+    if (hour < 12) headline.textContent = "Good morning. Tap the logo to get started";
+    else if (hour < 18) headline.textContent = "Good afternoon. Tap the logo to get started.";
+    else headline.textContent = "Good evening. Tap the logo to get started.";
 
     // Click Center Screen
     logoBtn.addEventListener('click', () => {
@@ -105,5 +105,6 @@
 </body>
 
 </html>
+
 
 
