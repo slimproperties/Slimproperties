@@ -8,10 +8,12 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #000000;
+      background: #000;
       color: #fff;
       text-align: center;
     }
+
+    /* Entrance */
     #entrance {
       display: flex;
       flex-direction: column;
@@ -37,79 +39,161 @@
       color: rgba(255,255,255,0.75);
       margin: 0 0 20px;
     }
-    .cta {
-      padding: 12px 20px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      margin: 5px;
-    }
-    .cta-primary {
-      background: #FFD700;
-      color: #FFFFFF;
-    }
-    .cta-secondary {
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.3);
-      color: #fff;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      padding: 15px;
-      background: #111;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    nav a {
-      color: #FFD700;
-      text-decoration: none;
-      font-weight: bold;
-    }
+
+    /* Main Site */
     #site {
       display: none;
       padding: 20px;
     }
+
+    /* Navigation */
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 15px;
+      background: #111;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .nav-btn {
+      background: #222;
+      color: #FFD700;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .nav-btn:hover {
+      background: #333;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.7);
+    }
+    .modal-content {
+      background-color: #1a1a1a;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 500px;
+      color: #fff;
+    }
+    .close {
+      color: #FFD700;
+      float: right;
+      font-size: 28px;
+      cursor: pointer;
+    }
+    #slimInput {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: none;
+    }
+    #slimSend {
+      margin-top: 10px;
+      padding: 10px 15px;
+      background: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #slimResponse {
+      margin-top: 15px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.8);
+      white-space: pre-line;
+    }
   </style>
 </head>
 <body>
-  <!-- Entrance Screen -->
+
+  <!-- Entrance -->
   <section id="entrance">
     <img src="slllim edits estates.png" class="logo" id="logoBtn" />
     <h1 class="headline" id="headline">The perfect home awaits.</h1>
-    <p class="subline" id="subline">Tap or click on the logo to get started.</p>
+    <p class="subline">Tap or click on the logo to get started.</p>
     <p style="font-size:0.9rem; color:rgba(255,255,255,0.6)">Turning dreams into reality since 2025.</p>
   </section>
 
   <!-- Main Site -->
   <main id="site">
-    <nav>
-      <a href="#">Explore smart listings</a>
-      <a href="#">Ask Slim</a>
-      <a href="#">Leadership</a>
-      <a href="#">Login</a>
+    <nav class="navbar">
+      <button class="nav-btn" id="exploreBtn">Explore Smart Listings</button>
+      <button class="nav-btn" id="askSlimBtn">Ask Slim</button>
+      <button class="nav-btn">Leadership</button>
+      <button class="nav-btn">Login</button>
     </nav>
     <h2>Welcome to Slim Estates</h2>
     <p>This is where your property listings, services, and contact form will go.</p>
   </main>
 
-  <script>
-    const logoBtn = document.getElementById('logoBtn');
-    const entrance = document.getElementById('entrance');
-    const site = document.getElementById('site');
-    const headline = document.getElementById('headline');
+  <!-- Ask Slim Modal -->
+  <div id="askSlimModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeSlim">&times;</span>
+      <h3>Ask Slim (Powered by Copilot)</h3>
+      <p>Hi there 👋 I'm Slim, your AI companion. Ask me anything about home listings, neighborhoods, or pricing!</p>
+      <input type="text" id="slimInput" placeholder="Type your question..." />
+      <button id="slimSend">Send</button>
+      <div id="slimResponse"></div>
+    </div>
+  </div>
 
+  <script>
+    // Time-based greeting
     const hour = new Date().getHours();
+    const headline = document.getElementById('headline');
     if (hour < 12) headline.textContent = "Good morning";
     else if (hour < 18) headline.textContent = "Good afternoon";
     else headline.textContent = "Good evening";
 
+    // Page transition
+    const logoBtn = document.getElementById('logoBtn');
+    const entrance = document.getElementById('entrance');
+    const site = document.getElementById('site');
     logoBtn.addEventListener('click', () => {
       entrance.style.display = 'none';
       site.style.display = 'block';
     });
+
+    // Ask Slim modal logic
+    const askSlimBtn = document.getElementById('askSlimBtn');
+    const askSlimModal = document.getElementById('askSlimModal');
+    const closeSlim = document.getElementById('closeSlim');
+    const slimSend = document.getElementById('slimSend');
+    const slimInput = document.getElementById('slimInput');
+    const slimResponse = document.getElementById('slimResponse');
+
+    askSlimBtn.addEventListener('click', () => {
+      askSlimModal.style.display = 'block';
+    });
+
+    closeSlim.addEventListener('click', () => {
+      askSlimModal.style.display = 'none';
+      slimInput.value = '';
+      slimResponse.textContent = '';
+    });
+
+    slimSend.addEventListener('click', () => {
+      const query = slimInput.value.trim();
+      if (!query) return;
+      slimResponse.textContent = `Searching listings for: "${query}"...`;
+      setTimeout(() => {
+        slimResponse.textContent = `Here's what I found for "${query}":\n- 3-bedroom homes in Detroit under $300K\n- Walkable neighborhoods near schools\n- Smart listings with virtual tours`;
+      }, 1500);
+    });
   </script>
 </body>
 </html>
-
